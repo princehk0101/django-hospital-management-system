@@ -426,7 +426,7 @@ def patient_book_appointment(request):
 
         doctor = Doctor.objects.get(id=doctor_id)
 
-        # 👉 Convert string to actual date & time objects
+        #  Convert string to actual date & time objects
         appointment_date = datetime.strptime(date_str, "%Y-%m-%d").date()
         appointment_time = datetime.strptime(time_str, "%H:%M").time()
 
@@ -505,3 +505,27 @@ def patient_profile_edit(request):
         return redirect("patient_profile")
 
     return render(request, "patient/profile_edit.html", {"patient": patient})
+
+# API VIEWS
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+from .models import Doctor
+from .serializers import DoctorSerializer
+
+
+class DoctorAPI(APIView):
+
+    def get(self, request):
+        doctors = Doctor.objects.all()
+        serializer = DoctorSerializer(doctors, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = DoctorSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

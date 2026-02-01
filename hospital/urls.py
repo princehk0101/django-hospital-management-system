@@ -47,4 +47,8 @@ path('admin/search/', views.admin_search, name='admin_search'),
     path('patient/doctor-profile/', views.patient_doctor_profile, name='patient_doctor_profile'),
     path('patient/history/', views.patient_history, name='patient_history'),
     path('patient/profile-edit/', views.patient_profile_edit, name='patient_profile_edit'),
+
+
+    path('api/doctors/', views.DoctorAPI.as_view(), name='api_doctors'),
 ]
+
