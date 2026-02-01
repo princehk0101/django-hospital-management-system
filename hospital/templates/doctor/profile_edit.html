@@ -1,0 +1,93 @@
+{% extends "doctor/doctor_base.html" %}
+{% load static %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block page_heading %}
+<i class="fa fa-edit me-2"></i> Edit Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <div class="card shadow-sm border-0 p-4">
+
+        <h4 class="fw-bold mb-3">Update Your Profile</h4>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="row g-3">
+
+                <!-- First Name -->
+                <div class="col-md-6">
+                    <label class="fw-semibold">First Name</label>
+                    <input type="text" name="fname" class="form-control"
+                           value="{{ doctor.user.first_name }}" required>
+                </div>
+
+                <!-- Last Name -->
+                <div class="col-md-6">
+                    <label class="fw-semibold">Last Name</label>
+                    <input type="text" name="lname" class="form-control"
+                           value="{{ doctor.user.last_name }}" required>
+                </div>
+
+                <!-- Specialization -->
+                <div class="col-md-6">
+                    <label class="fw-semibold">Specialization</label>
+                    <input type="text" name="specialization" class="form-control"
+                           value="{{ doctor.specialization }}" required>
+                </div>
+
+                <!-- Department -->
+                <div class="col-md-6">
+                    <label class="fw-semibold">Department</label>
+                    <select name="department" class="form-select" required>
+                        <option value="Cardiology" {% if doctor.department == "Cardiology" %}selected{% endif %}>Cardiology</option>
+                        <option value="Neurology" {% if doctor.department == "Neurology" %}selected{% endif %}>Neurology</option>
+                        <option value="Orthopedics" {% if doctor.department == "Orthopedics" %}selected{% endif %}>Orthopedics</option>
+                        <option value="Pediatrics" {% if doctor.department == "Pediatrics" %}selected{% endif %}>Pediatrics</option>
+                        <option value="Dermatology" {% if doctor.department == "Dermatology" %}selected{% endif %}>Dermatology</option>
+                    </select>
+                </div>
+
+                <!-- Experience -->
+                <div class="col-md-6">
+                    <label class="fw-semibold">Experience (Years)</label>
+                    <input type="number" name="experience" class="form-control"
+                           value="{{ doctor.experience }}" required>
+                </div>
+
+                <!-- Languages -->
+                <div class="col-md-6">
+                    <label class="fw-semibold">Languages</label>
+                    <input type="text" name="language" class="form-control"
+                           value="{{ doctor.language }}" required>
+                </div>
+
+                <!-- Location -->
+                <div class="col-md-12">
+                    <label class="fw-semibold">Location</label>
+                    <input type="text" name="location" class="form-control"
+                           value="{{ doctor.location }}" required>
+                </div>
+
+            </div>
+
+            <button class="btn btn-primary rounded-pill px-4 mt-4">
+                Save Changes
+            </button>
+
+            <a href="{% url 'doctor_profile' %}" class="btn btn-secondary rounded-pill px-4 mt-4 ms-2">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

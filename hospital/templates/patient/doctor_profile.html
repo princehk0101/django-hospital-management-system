@@ -1,0 +1,173 @@
+{% extends "patient/patient_base.html" %}
+{% load static %}
+
+{% block title %}Doctor Profile{% endblock %}
+
+{% block page_heading %}
+<i class="fa fa-user-doctor me-2"></i> Doctor Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <div class="row g-4">
+
+        <!-- LEFT SIDE: Doctor Card -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 p-4 text-center">
+
+                <img src="https://cdn-icons-png.flaticon.com/512/3304/3304567.png"
+                     class="rounded-circle doctor-img mb-3" width="130" />
+
+                <h4 class="fw-bold mb-0">
+                    Dr. {{ doctor.user.get_full_name }}
+                </h4>
+                <p class="text-secondary">
+                    {{ doctor.specialization }}
+                </p>
+
+                <!-- Rating (still static demo) -->
+                <div class="text-warning mb-3">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span class="text-dark ms-2 small">4.0 (125 reviews)</span>
+                </div>
+
+                <hr>
+
+                <div class="text-start mt-3 small">
+                    <p>
+                        <i class="fa fa-user-md text-primary me-2"></i>
+                        Experience: {{ doctor.experience }}+ years
+                    </p>
+                    <p>
+                        <i class="fa fa-hospital text-primary me-2"></i>
+                        Department: {{ doctor.department }}
+                    </p>
+                    <p>
+                        <i class="fa fa-language text-primary me-2"></i>
+                        Languages: {{ doctor.language }}
+                    </p>
+                    <p>
+                        <i class="fa fa-map-marker text-primary me-2"></i>
+                        Location: {{ doctor.location }}
+                    </p>
+                </div>
+
+                <!-- pass doctor_id so book page can preselect -->
+                <a href="{% url 'patient_book_appointment' %}?doctor_id={{ doctor.id }}"
+                   class="btn btn-primary rounded-pill w-100 mt-3 py-2">
+                    <i class="fa fa-calendar-check me-1"></i> Book Appointment
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE: Details -->
+        <div class="col-md-8">
+
+            <!-- ABOUT DOCTOR -->
+            <div class="card shadow-sm border-0 p-4 mb-4">
+                <h5 class="fw-bold mb-3">About Doctor</h5>
+
+                <p class="text-secondary">
+                    Dr. {{ doctor.user.get_full_name }} is an experienced
+                    {{ doctor.specialization }} with {{ doctor.experience }}+ years of
+                    expertise in the {{ doctor.department }} department. They have handled
+                    many complex cases and are known for patient-friendly behaviour and
+                    accurate medical decisions.
+                </p>
+
+                <p class="text-secondary">
+                    Their focus is on evidence-based treatment, preventive care and
+                    long-term patient health.
+                </p>
+            </div>
+
+            <!-- AVAILABLE TIMINGS -->
+            <div class="card shadow-sm border-0 p-4 mb-4">
+                <h5 class="fw-bold mb-3">Available Timings</h5>
+
+                <table class="table align-middle">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Day</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for slot in availability %}
+                            <tr>
+                                <td>{{ slot.day }}</td>
+                                <td>{{ slot.time_range }}</td>
+                                <td>
+                                    {% if slot.time_range %}
+                                        <span class="badge bg-success">Available</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Not Available</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">
+                                    Availability not added yet.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!-- SPECIALIZATION -->
+            <div class="card shadow-sm border-0 p-4 mb-4">
+                <h5 class="fw-bold mb-3">Specializations</h5>
+
+                <ul class="list-unstyled small">
+                    <li class="mb-2">
+                        <i class="fa fa-check text-primary me-2"></i>
+                        Advanced diagnosis & treatment in {{ doctor.specialization }}
+                    </li>
+                    <li class="mb-2">
+                        <i class="fa fa-check text-primary me-2"></i>
+                        Preventive care and regular health check-ups
+                    </li>
+                    <li class="mb-2">
+                        <i class="fa fa-check text-primary me-2"></i>
+                        Management of chronic / complex cases
+                    </li>
+                    <li class="mb-2">
+                        <i class="fa fa-check text-primary me-2"></i>
+                        Patient education & lifestyle counselling
+                    </li>
+                </ul>
+            </div>
+
+            <!-- EXPERIENCE -->
+            <div class="card shadow-sm border-0 p-4">
+                <h5 class="fw-bold mb-3">Experience</h5>
+
+                <p class="text-secondary small">
+                    Dr. {{ doctor.user.get_full_name }} has worked with reputed
+                    hospitals/clinics and has handled both emergency and routine cases
+                    in {{ doctor.department }}. The approach combines updated medical
+                    guidelines with compassionate patient care.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

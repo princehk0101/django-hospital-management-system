@@ -1,0 +1,71 @@
+{% extends "doctor/doctor_base.html" %}
+{% load static %}
+
+{% block title %}Doctor Appointments - MeCare HMS{% endblock %}
+
+{% block page_heading %}
+<i class="fa fa-calendar-check me-2"></i>Today's Appointments
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-white">
+        <h5 class="fw-bold">Today's Appointments</h5>
+    </div>
+
+    <div class="card-body">
+
+        {% if appointments %}
+        <table class="table align-middle">
+            <thead class="bg-light">
+                <tr>
+                    <th>Patient</th>
+                    <th>Age</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Treatment</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for appt in appointments %}
+                <tr>
+                    <td><strong>{{ appt.patient.user.get_full_name }}</strong></td>
+                    <td>{{ appt.patient.age }}</td>
+                    <td>{{ appt.time|time:"h:i A" }}</td>
+
+                    <td>
+                        {% if appt.status == "Waiting" %}
+                            <span class="badge bg-primary">Waiting</span>
+                        {% elif appt.status == "In Process" %}
+                            <span class="badge bg-warning">In Process</span>
+                        {% elif appt.status == "Completed" %}
+                            <span class="badge bg-success">Completed</span>
+                        {% else %}
+                            <span class="badge bg-secondary">{{ appt.status }}</span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if appt.status != "Completed" %}
+                            <a href="{% url 'doctor_treatment_form' appt.id %}" class="btn btn-sm btn-success">
+                                Add Treatment
+                            </a>
+                        {% else %}
+                            <span class="badge bg-success">Done</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+        <p class="text-muted text-center">No appointments today.</p>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "doctor/doctor_base.html" %}
+{% load custom_filters %}
+
+{% load static %}
+
+{% block title %}Set Availability - MeCare HMS{% endblock %}
+
+{% block page_heading %}
+<i class="fa fa-clock me-2"></i>Doctor Availability
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-white">
+        <h5 class="fw-bold">Weekly Availability</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST" class="row g-4">
+            {% csrf_token %}
+
+            {% for day in days %}
+            <div class="col-md-6">
+                <label class="fw-semibold">{{ day }}</label>
+
+                <input type="text"
+                       class="form-control"
+                       name="{{ day }}"
+                       placeholder="Ex: 10:00 AM - 2:00 PM"
+                       value="{{ availability.day|get_item:day }}">
+            </div>
+            {% endfor %}
+
+            <div class="col-12 mt-3">
+                <button class="btn btn-primary w-100 rounded-pill py-2">
+                    <i class="fa fa-save me-1"></i> Update Availability
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

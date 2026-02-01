@@ -1,0 +1,124 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+
+{% block title %}Search - Admin Panel{% endblock %}
+
+{% block content %}
+
+<!-- TOP NAVBAR -->
+<nav class="navbar navbar-light bg-white shadow-sm py-3 mb-3">
+    <div class="container-fluid">
+
+        <a class="navbar-brand text-primary fw-bold fs-4">
+            <i class="fa fa-search me-2"></i>Search Records
+        </a>
+
+        <div class="ms-auto">
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-primary btn-sm rounded-pill me-2">
+                <i class="fa fa-arrow-left"></i> Back
+            </a>
+            <a href="{% url 'login' %}" class="btn btn-danger btn-sm rounded-pill">
+                <i class="fa fa-power-off"></i> Logout
+            </a>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- SEARCH BAR -->
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+
+        <form method="GET">
+            <div class="row g-3">
+
+                <!-- Search input -->
+                <div class="col-md-6">
+                    <input type="text"
+                           name="q"
+                           class="form-control rounded-pill"
+                           placeholder="Search by name, phone or ID"
+                           value="{{ request.GET.q }}">
+                </div>
+
+                <!-- Filter: Doctors or Patients -->
+                <div class="col-md-4">
+                    <select name="type" class="form-select rounded-pill">
+                        <option value="">Search In</option>
+                        <option value="doctor" {% if request.GET.type == 'doctor' %}selected{% endif %}>Doctors</option>
+                        <option value="patient" {% if request.GET.type == 'patient' %}selected{% endif %}>Patients</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100 rounded-pill">
+                        <i class="fa fa-search me-1"></i> Search
+                    </button>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<!-- SEARCH RESULTS -->
+<h5 class="fw-bold mb-3">Search Results</h5>
+
+<div class="row g-4">
+
+    {% if results %}
+
+        {% for item in results %}
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 p-3">
+
+                <h5 class="fw-bold mb-1">
+                    {{ item.user.get_full_name }}
+                </h5>
+
+                {% if item.specialization %}
+                    <p class="text-secondary small mb-1">{{ item.specialization }}</p>
+                {% else %}
+                    <p class="text-secondary small mb-1">Patient</p>
+                {% endif %}
+
+                <p class="small mb-1">
+                    <i class="fa fa-phone text-primary me-1"></i> 
+                    {% if item.phone_number %}{{ item.phone_number }}{% endif %}
+                </p>
+
+                <p class="small">
+                    <i class="fa fa-map-marker text-primary me-1"></i>
+                    {{ item.address }}
+                </p>
+
+                {% if item.specialization %}
+                    <a href="{% url 'admin_doctors' %}" 
+                       class="btn btn-outline-primary btn-sm rounded-pill w-100 mt-2">
+                        View Doctor
+                    </a>
+                {% else %}
+                    <a href="{% url 'admin_patients' %}" 
+                       class="btn btn-outline-primary btn-sm rounded-pill w-100 mt-2">
+                        View Patient
+                    </a>
+                {% endif %}
+
+            </div>
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p class="text-muted">No results found.</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

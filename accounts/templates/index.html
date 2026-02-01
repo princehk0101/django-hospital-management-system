@@ -1,0 +1,300 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MeCare HMS - Home{% endblock %}
+
+{% block content %}
+
+
+<section class="hero-section position-relative overflow-hidden">
+    <div class="container py-5">
+        <div class="row align-items-center">
+
+            <!-- TEXT -->
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold text-dark mb-3">
+                    Your Health, Our Priority
+                </h1>
+                <p class="lead text-secondary">
+                    Welcome to MeCare Hospital Management System. This is a modern, fast and secure platform to manage
+                    appointments, doctors, patients, and all hospital operations smoothly.
+                </p>
+
+                <div class="mt-4 d-flex gap-3">
+                    <a href="{% url 'login' %}" class="btn btn-primary px-4 py-2 rounded-pill">
+                        Make Appointment
+                    </a>
+
+                    <a href="{% url 'about' %}" class="btn btn-outline-primary px-4 py-2 rounded-pill">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+
+            <!-- IMAGE -->
+            <div class="col-lg-6 text-end">
+                <img src="https://htmldemo.zcubethemes.com/mecare/img/bg/header-img.png"
+                     class="img-fluid hero-img" alt="">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Wavy SVG Border -->
+    <svg class="wave-svg" viewBox="0 0 1440 220">
+        <path fill="#fff" fill-opacity="1"
+              d="M0,192L60,181.3C120,171,240,149,360,133.3C480,117,600,107,720,112C840,117,960,139,1080,149.3C1200,160,1320,160,1380,160L1440,160V220H0Z">
+        </path>
+    </svg>
+</section>
+
+
+
+<section class="services py-5">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-dark">Our Medical Services</h2>
+            <p class="text-secondary">Professional care and quality medical facilities for everyone.</p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="card service-card p-4 text-center">
+                    <i class="fa-solid fa-heart-pulse text-primary fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Cardiology</h5>
+                    <p class="text-secondary">Top-notch heart care with modern technology and expert doctors.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card service-card p-4 text-center">
+                    <i class="fa-solid fa-brain text-primary fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Neurology</h5>
+                    <p class="text-secondary">Precise diagnosis and treatment of neurological disorders.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card service-card p-4 text-center">
+                    <i class="fa-solid fa-children text-primary fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Pediatrics</h5>
+                    <p class="text-secondary">Complete medical care for infants, toddlers and children.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+<section class="features py-5 bg-light">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-dark">Why Choose MeCare?</h2>
+            <p class="text-secondary">We offer safe and reliable hospital management.</p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="p-4 shadow-sm rounded bg-white h-100">
+                    <h5 class="fw-bold mb-2">
+                        <i class="fa-solid fa-shield-halved text-primary me-2"></i>
+                        Secure Platform
+                    </h5>
+                    <p class="text-secondary">Data security and privacy through strong encryption and authentication.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-4 shadow-sm rounded bg-white h-100">
+                    <h5 class="fw-bold mb-2">
+                        <i class="fa-solid fa-clock text-primary me-2"></i>
+                        Fast Appointments
+                    </h5>
+                    <p class="text-secondary">Book appointments quickly with real-time doctor availability.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-4 shadow-sm rounded bg-white h-100">
+                    <h5 class="fw-bold mb-2">
+                        <i class="fa-solid fa-users text-primary me-2"></i>
+                        Trusted Doctors
+                    </h5>
+                    <p class="text-secondary">Highly qualified specialists with years of experience.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Meet Our Specialists</h2>
+            <p class="text-secondary">Experienced doctors who provide personalized medical care.</p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="doctor-card text-center p-4 shadow-sm rounded bg-white">
+                    <img src="https://cdn.pixabay.com/photo/2024/09/03/15/21/ai-generated-9019517_1280.png"
+                         width="120" height="120" class="rounded-circle mb-3 doctor-img" alt="">
+                    <h5 class="fw-bold">Dr. Riya Sharma</h5>
+                    <p class="text-secondary">Cardiologist</p>
+                    <div class="social-icons mt-3">
+                        <i class="fab fa-facebook"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="doctor-card text-center p-4 shadow-sm rounded bg-white">
+                    <img src="https://cdn.pixabay.com/photo/2024/09/03/15/21/ai-generated-9019520_1280.png"
+                         width="120" height="120" class="rounded-circle mb-3 doctor-img" alt="">
+                    <h5 class="fw-bold">Dr. Aman Verma</h5>
+                    <p class="text-secondary">Neurologist</p>
+                    <div class="social-icons mt-3">
+                        <i class="fab fa-facebook"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="doctor-card text-center p-4 shadow-sm rounded bg-white">
+                    <img src="https://cdn.pixabay.com/photo/2016/09/29/19/55/doctor-1703644_1280.jpg"
+                         width="120" height="120" class="rounded-circle mb-3 doctor-img" alt="">
+                    <h5 class="fw-bold">Dr. Priya Singh</h5>
+                    <p class="text-secondary">Pediatric Specialist</p>
+                    <div class="social-icons mt-3">
+                        <i class="fab fa-facebook"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<section class="testimonials py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">What Our Patients Say</h2>
+            <p class="text-secondary">Trusted care with satisfied patients.</p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+                <div class="p-4 shadow-sm bg-white rounded">
+                    <p class="text-secondary">
+                        “MeCare hospital provided excellent services. Doctors were very helpful and staff was very polite.”
+                    </p>
+                    <h6 class="fw-bold mt-2">Rakesh Yadav</h6>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-4 shadow-sm bg-white rounded">
+                    <p class="text-secondary">
+                        “Quick appointment booking and great medical support. Highly recommended!”
+                    </p>
+                    <h6 class="fw-bold mt-2">Anjali Verma</h6>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Our Departments</h2>
+            <p class="text-secondary">We cover all important medical specialties.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="department-card p-4 text-center shadow-sm rounded bg-white">
+                    <i class="fa-solid fa-heart-pulse text-primary fs-2 mb-2"></i>
+                    <h6 class="fw-bold mb-1">Cardiology</h6>
+                    <p class="text-secondary small">Heart care and cardiac surgery.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="department-card p-4 text-center shadow-sm rounded bg-white">
+                    <i class="fa-solid fa-brain text-primary fs-2 mb-2"></i>
+                    <h6 class="fw-bold mb-1">Neurology</h6>
+                    <p class="text-secondary small">Care for the brain and nervous system.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="department-card p-4 text-center shadow-sm rounded bg-white">
+                    <i class="fa-solid fa-bone text-primary fs-2 mb-2"></i>
+                    <h6 class="fw-bold mb-1">Orthopedics</h6>
+                    <p class="text-secondary small">Treatments for bones and joints.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="department-card p-4 text-center shadow-sm rounded bg-white">
+                    <i class="fa-solid fa-virus-covid text-primary fs-2 mb-2"></i>
+                    <h6 class="fw-bold mb-1">General Medicine</h6>
+                    <p class="text-secondary small">Routine checkups and diagnosis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="quick-contact py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="fw-bold">Need Emergency Help?</h2>
+        <p class="mb-3">Our doctors are available 24/7 for immediate medical support.</p>
+        <a href="{% url 'contact' %}" class="btn btn-light px-4 py-2 rounded-pill">
+            Contact Us Now
+        </a>
+    </div>
+</section>
+
+
+
+<section class="newsletter py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-2">Subscribe to our Newsletter</h2>
+        <p class="text-secondary mb-4">Stay updated with medical news and health tips.</p>
+
+        <form class="d-flex justify-content-center gap-2">
+            <input type="email" class="form-control w-50 rounded-pill" placeholder="Enter your email">
+            <button class="btn btn-primary px-4 rounded-pill">Subscribe</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

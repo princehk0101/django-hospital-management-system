@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Doctor Panel{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body class="bg-light">
+    <!-- TOPBAR -->
+    <nav class="navbar navbar-light bg-white shadow-sm py-3">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-primary fs-4">
+          {% block page_heading %}
+          <i class="fa fa-user-doctor me-2"></i>Doctor Panel {% endblock %}
+        </a>
+
+        <div class="ms-auto">
+          <a
+            href="{% url 'doctor_dashboard' %}"
+            class="btn btn-outline-primary btn-sm rounded-pill me-2">
+            Dashboard
+          </a>
+          <a
+            href="{% url 'login' %}"
+            class="btn btn-danger btn-sm rounded-pill">
+            <i class="fa fa-power-off"></i> Logout
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <!-- SIDEBAR -->
+        <div class="col-md-3 col-lg-2 mb-4">
+          <div class="list-group shadow-sm">
+
+            <a
+              href="{% url 'doctor_dashboard' %}"
+              class="list-group-item list-group-item-action">
+              <i class="fa fa-home me-2"></i> Dashboard
+            </a>
+
+            <a
+              href="{% url 'doctor_appointments' %}"
+              class="list-group-item list-group-item-action">
+              <i class="fa fa-calendar-check me-2"></i> Appointments
+            </a>
+
+            <a
+              href="{% url 'doctor_patient_history' %}"
+              class="list-group-item list-group-item-action">
+              <i class="fa fa-file-medical me-2"></i> Patient History
+            </a>
+
+            <!-- IMPORTANT: Treatment Form link REMOVED completely -->
+
+            <a
+              href="{% url 'doctor_availability' %}"
+              class="list-group-item list-group-item-action">
+              <i class="fa fa-clock me-2"></i> Set Availability
+            </a>
+
+            <a
+              href="{% url 'doctor_profile' %}"
+              class="list-group-item list-group-item-action">
+              <i class="fa fa-user-circle me-2"></i> My Profile
+            </a>
+
+            <a
+              href="{% url 'doctor_profile_edit' %}"
+              class="list-group-item list-group-item-action">
+              <i class="fa fa-edit me-2"></i> Edit Profile
+            </a>
+
+          </div>
+        </div>
+
+        <!-- MAIN PAGE CONTENT -->
+        <div class="col-md-9 col-lg-10">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

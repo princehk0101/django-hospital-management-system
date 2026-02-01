@@ -1,0 +1,71 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+
+{% block title %}Edit Patient - Admin Panel{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm border-0 p-4">
+
+    <h3 class="fw-bold text-primary mb-4">
+        <i class="fa fa-edit me-2"></i> Edit Patient
+    </h3>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label class="fw-semibold">First Name</label>
+                <input type="text" class="form-control" name="fname"
+                       value="{{ patient.user.first_name }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-semibold">Last Name</label>
+                <input type="text" class="form-control" name="lname"
+                       value="{{ patient.user.last_name }}" required>
+            </div>
+
+            <div class="col-md-4">
+                <label class="fw-semibold">Age</label>
+                <input type="number" class="form-control" name="age"
+                       value="{{ patient.age }}" required>
+            </div>
+
+            <div class="col-md-4">
+                <label class="fw-semibold">Gender</label>
+                <select class="form-select" name="gender" required>
+                    <option value="Male" {% if patient.gender == "Male" %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if patient.gender == "Female" %}selected{% endif %}>Female</option>
+                    <option value="Other" {% if patient.gender == "Other" %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="fw-semibold">Phone</label>
+                <input type="text" class="form-control" name="phone"
+                       value="{{ patient.phone_number }}" required>
+            </div>
+
+            <div class="col-12">
+                <label class="fw-semibold">Address</label>
+                <textarea class="form-control" name="address" rows="2">{{ patient.address }}</textarea>
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary rounded-pill px-4 mt-4">
+            <i class="fa fa-save me-2"></i> Update Details
+        </button>
+
+        <a href="{% url 'admin_patients' %}" class="btn btn-secondary rounded-pill px-4 mt-4 ms-2">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

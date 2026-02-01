@@ -1,0 +1,106 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+
+{% block title %}Add Doctor - MeCare Admin{% endblock %}
+
+{% block content %}
+
+<!-- TOP NAVBAR -->
+<nav class="navbar navbar-light bg-white shadow-sm py-3 mb-3">
+    <div class="container-fluid">
+
+        <a class="navbar-brand text-primary fw-bold fs-4">
+            <i class="fa fa-user-plus me-2"></i>Add Doctor
+        </a>
+
+        <div class="ms-auto">
+            <a href="{% url 'admin_doctors' %}" class="btn btn-outline-primary btn-sm rounded-pill me-2">
+                <i class="fa fa-arrow-left"></i> Back
+            </a>
+
+            <a href="{% url 'login' %}" class="btn btn-danger btn-sm rounded-pill">
+                <i class="fa fa-power-off"></i> Logout
+            </a>
+        </div>
+
+    </div>
+</nav>
+
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white">
+        <h5 class="fw-bold">Doctor Details</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST" class="row g-4">
+            {% csrf_token %}
+
+            <!-- FIRST NAME -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">First Name</label>
+                <input type="text" class="form-control" name="fname" required>
+            </div>
+
+            <!-- LAST NAME -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Last Name</label>
+                <input type="text" class="form-control" name="lname" required>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+
+            <!-- SPECIALIZATION -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Specialization</label>
+                <input type="text" class="form-control" name="specialization" required>
+            </div>
+
+            <!-- DEPARTMENT -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Department</label>
+                <select class="form-select" name="department" required>
+                    <option>Cardiology</option>
+                    <option>Neurology</option>
+                    <option>Pediatrics</option>
+                    <option>Orthopedics</option>
+                    <option>Dermatology</option>
+                </select>
+            </div>
+
+            <!-- EXPERIENCE -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Experience (Years)</label>
+                <input type="number" class="form-control" name="experience" required>
+            </div>
+
+            <!-- LANGUAGES -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Languages</label>
+                <input type="text" class="form-control" name="language" required>
+            </div>
+
+            <!-- LOCATION -->
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Location</label>
+                <input type="text" class="form-control" name="location" required>
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="col-12">
+                <button class="btn btn-primary w-100 rounded-pill py-2">
+                    <i class="fa fa-save me-1"></i> Save Doctor Details
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

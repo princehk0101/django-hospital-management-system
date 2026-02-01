@@ -1,0 +1,72 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+
+{% block title %}Edit Doctor{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm border-0 p-4">
+
+    <h3 class="fw-bold text-primary mb-4">
+        <i class="fa fa-user-md me-2"></i>Edit Doctor
+    </h3>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label class="fw-semibold">First Name</label>
+                <input type="text" class="form-control" name="fname" value="{{ doctor.user.first_name }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-semibold">Last Name</label>
+                <input type="text" class="form-control" name="lname" value="{{ doctor.user.last_name }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-semibold">Specialization</label>
+                <input type="text" class="form-control" name="specialization" value="{{ doctor.specialization }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-semibold">Department</label>
+                <select class="form-select" name="department" required>
+                    <option value="Cardiology" {% if doctor.department == "Cardiology" %}selected{% endif %}>Cardiology</option>
+                    <option value="Neurology" {% if doctor.department == "Neurology" %}selected{% endif %}>Neurology</option>
+                    <option value="Orthopedics" {% if doctor.department == "Orthopedics" %}selected{% endif %}>Orthopedics</option>
+                    <option value="Pediatrics" {% if doctor.department == "Pediatrics" %}selected{% endif %}>Pediatrics</option>
+                    <option value="Dermatology" {% if doctor.department == "Dermatology" %}selected{% endif %}>Dermatology</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-semibold">Experience</label>
+                <input type="number" class="form-control" name="experience" value="{{ doctor.experience }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="fw-semibold">Languages</label>
+                <input type="text" class="form-control" name="language" value="{{ doctor.language }}" required>
+            </div>
+
+            <div class="col-12">
+                <label class="fw-semibold">Location</label>
+                <input type="text" class="form-control" name="location" value="{{ doctor.location }}" required>
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary rounded-pill px-4 mt-4">
+            <i class="fa fa-save me-2"></i>Save Changes
+        </button>
+
+        <a href="{% url 'admin_doctors' %}" class="btn btn-secondary rounded-pill px-4 mt-4 ms-2">Cancel</a>
+
+    </form>
+
+</div>
+
+{% endblock %}

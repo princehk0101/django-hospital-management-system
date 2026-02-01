@@ -1,0 +1,42 @@
+{% extends "patient/patient_base.html" %}
+{% load static %}
+
+{% block title %}Doctors List{% endblock %}
+
+{% block page_heading %}
+<i class="fa fa-user-doctor me-2"></i> Doctors List
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <div class="row g-4">
+
+        {% for doc in doctors %}
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 text-center p-3">
+
+                <img src="https://cdn-icons-png.flaticon.com/512/3304/3304567.png"
+                     class="rounded-circle doctor-img" width="120">
+
+                <h5 class="fw-bold mt-3">Dr. {{ doc.user.get_full_name }}</h5>
+
+                <p class="text-secondary mb-1">{{ doc.specialization }}</p>
+                <p class="small text-muted">{{ doc.experience }}+ years experience</p>
+
+                <!-- FIXED BUTTON -->
+                <a href="{% url 'patient_doctor_profile' %}?id={{ doc.id }}"
+                   class="btn btn-primary rounded-pill px-4 mt-2">
+                    View Profile
+                </a>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

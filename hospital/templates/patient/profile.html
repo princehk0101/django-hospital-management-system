@@ -1,0 +1,78 @@
+{% extends "patient/patient_base.html" %}
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block page_heading %}
+<i class="fa fa-user me-2"></i> My Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm border-0 p-4">
+
+    <h3 class="fw-bold text-primary mb-3">
+        <i class="fa fa-user me-2"></i> My Profile
+    </h3>
+
+    <div class="row g-4">
+
+        <!-- PROFILE PHOTO -->
+        <div class="col-md-4 text-center">
+            <img src="https://img.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg"
+                 class="rounded-circle shadow-sm mb-3"
+                 width="150">
+
+            <h5 class="fw-bold">
+                {{ patient.user.get_full_name }}
+            </h5>
+
+            <p class="text-secondary small">Patient</p>
+        </div>
+
+        <!-- PROFILE DETAILS -->
+        <div class="col-md-8">
+
+            <!-- EMAIL -->
+            <div class="row mb-3">
+                <div class="col-4 fw-semibold">Email:</div>
+                <div class="col-8 text-secondary">{{ patient.user.email }}</div>
+            </div>
+
+            <!-- PHONE -->
+            <div class="row mb-3">
+                <div class="col-4 fw-semibold">Phone:</div>
+                <div class="col-8 text-secondary">{{ patient.phone_number }}</div>
+            </div>
+
+            <!-- AGE -->
+            <div class="row mb-3">
+                <div class="col-4 fw-semibold">Age:</div>
+                <div class="col-8 text-secondary">{{ patient.age }}</div>
+            </div>
+
+            <!-- GENDER -->
+            <div class="row mb-3">
+                <div class="col-4 fw-semibold">Gender:</div>
+                <div class="col-8 text-secondary">{{ patient.gender }}</div>
+            </div>
+
+            <!-- ADDRESS -->
+            <div class="row mb-3">
+                <div class="col-4 fw-semibold">Address:</div>
+                <div class="col-8 text-secondary">{{ patient.address }}</div>
+            </div>
+
+            <!-- EDIT BUTTON -->
+            <a href="{% url 'patient_profile_edit' %}"
+               class="btn btn-primary rounded-pill px-4 mt-3">
+                Edit Profile
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

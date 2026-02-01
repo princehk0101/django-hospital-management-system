@@ -1,0 +1,97 @@
+{% extends "patient/patient_base.html" %}
+{% load static %}
+
+{% block title %}Treatment History{% endblock %}
+
+{% block page_heading %}
+<i class="fa fa-file-medical me-2"></i> Treatment History
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-white">
+            <h5 class="fw-bold mb-0">Your Treatment Records</h5>
+        </div>
+
+        <div class="card-body">
+
+            {% if records %}
+            <table class="table align-middle">
+                <thead class="bg-light">
+                    <tr>
+                        <th>Date</th>
+                        <th>Doctor</th>
+                        <th>Department</th>
+                        <th>Diagnosis</th>
+                        <th>Prescription</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for rec in records %}
+                    <tr>
+
+                        <!-- DATE -->
+                        <td>{{ rec.appointment.date|date:"d M Y" }}</td>
+
+                        <!-- DOCTOR -->
+                        <td>
+                            <strong>Dr. {{ rec.appointment.doctor.user.get_full_name }}</strong>
+                            <p class="small text-muted mb-0">
+                                {{ rec.appointment.doctor.specialization }}
+                            </p>
+                        </td>
+
+                        <!-- DEPARTMENT -->
+                        <td>{{ rec.appointment.doctor.department }}</td>
+
+                        <!-- DIAGNOSIS -->
+                        <td style="max-width:220px;">
+                            <div class="small text-secondary text-wrap">
+                                {{ rec.diagnosis }}
+                            </div>
+                        </td>
+
+                        <!-- PRESCRIPTION -->
+                        <td style="max-width:220px;">
+                            <div class="small text-secondary text-wrap">
+                                {{ rec.prescription }}
+                            </div>
+                        </td>
+
+                        <!-- STATUS -->
+                        <td>
+                            {% if rec.appointment.status == "Completed" %}
+                                <span class="badge bg-success">Completed</span>
+                            {% elif rec.appointment.status == "In Process" %}
+                                <span class="badge bg-warning">In Process</span>
+                            {% elif rec.appointment.status == "Waiting" %}
+                                <span class="badge bg-secondary">Waiting</span>
+                            {% elif rec.appointment.status == "Cancelled" %}
+                                <span class="badge bg-danger">Cancelled</span>
+                            {% else %}
+                                <span class="badge bg-dark">{{ rec.appointment.status }}</span>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% else %}
+            <div class="text-center text-muted py-4">
+                No treatment history found.
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

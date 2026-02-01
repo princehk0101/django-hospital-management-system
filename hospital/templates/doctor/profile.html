@@ -1,0 +1,45 @@
+{% extends "doctor/doctor_base.html" %}
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block page_heading %}
+<i class="fa fa-user-circle me-2"></i> My Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <div class="card shadow-sm border-0 p-4">
+        <div class="text-center">
+
+            <img src="https://cdn-icons-png.flaticon.com/512/3304/3304567.png"
+                 width="120" class="rounded-circle mb-3">
+
+            <h3 class="fw-bold">Dr. {{ doctor.user.get_full_name }}</h3>
+            <p class="text-muted">{{ doctor.specialization }}</p>
+        </div>
+
+        <hr>
+
+        <div class="row mt-3">
+
+            <div class="col-md-6">
+                <p><strong>Department:</strong> {{ doctor.department }}</p>
+                <p><strong>Experience:</strong> {{ doctor.experience }} years</p>
+                <p><strong>Languages:</strong> {{ doctor.language }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <p><strong>Location:</strong> {{ doctor.location }}</p>
+                <p><strong>Username:</strong> {{ doctor.user.username }}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

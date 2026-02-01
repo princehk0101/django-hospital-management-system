@@ -1,0 +1,82 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+
+{% block title %}Edit Appointment - Admin{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm border-0 p-4">
+
+    <h3 class="fw-bold text-primary mb-4">
+        <i class="fa fa-edit me-2"></i>Edit Appointment
+    </h3>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="row g-3">
+
+            <!-- PATIENT -->
+            <div class="col-md-6">
+                <label class="fw-semibold">Patient</label>
+                <input type="text" class="form-control" 
+                       value="{{ appointment.patient.user.get_full_name }}" disabled>
+            </div>
+
+            <!-- DOCTOR -->
+            <div class="col-md-6">
+                <label class="fw-semibold">Doctor</label>
+                <input type="text" class="form-control" 
+                       value="Dr. {{ appointment.doctor.user.get_full_name }} ({{ appointment.doctor.department }})" 
+                       disabled>
+            </div>
+
+            <!-- DATE -->
+            <div class="col-md-6">
+                <label class="fw-semibold">Date</label>
+                <input type="date" name="date" class="form-control"
+                       value="{{ appointment.date|date:'Y-m-d' }}" required>
+            </div>
+
+            <!-- TIME -->
+            <div class="col-md-6">
+                <label class="fw-semibold">Time</label>
+                <input type="time" name="time" class="form-control"
+                       value="{{ appointment.time|time:'H:i' }}" required>
+            </div>
+
+            <!-- STATUS -->
+            <div class="col-md-6">
+                <label class="fw-semibold">Status</label>
+                <select name="status" class="form-select" required>
+                    <option value="Pending" 
+                        {% if appointment.status == "Pending" %}selected{% endif %}>
+                        Waiting
+                    </option>
+                    <option value="Confirmed" 
+                        {% if appointment.status == "Confirmed" %}selected{% endif %}>
+                        Confirmed
+                    </option>
+                    <option value="Cancelled" 
+                        {% if appointment.status == "Cancelled" %}selected{% endif %}>
+                        Cancelled
+                    </option>
+                </select>
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary rounded-pill px-4 mt-4">
+            <i class="fa fa-save me-2"></i> Save Changes
+        </button>
+
+        <a href="{% url 'admin_appointments' %}" 
+           class="btn btn-secondary rounded-pill px-4 mt-4 ms-2">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

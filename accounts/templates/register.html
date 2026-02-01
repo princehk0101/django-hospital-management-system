@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register - MeCare HMS{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center align-items-center">
+
+        <!-- Left Image -->
+        <div class="col-md-5 text-center mb-4">
+            <img src="https://img.graphicsurf.com/2020/08/medicine-vector-flat-illustration.jpg"
+                 width="700" class="img-fluid">
+        </div>
+
+        <!-- Register Card -->
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0 p-4">
+
+                <h3 class="fw-bold text-primary text-center mb-3">Create Account</h3>
+                <p class="text-center text-secondary mb-4">Register to get started</p>
+
+                {% if error %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
+
+                <!-- REAL DJANGO FORM -->
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <!-- Full Name -->
+                    <div class="mb-3">
+                        <label class="fw-semibold">Full Name</label>
+                        <input type="text" name="name" class="form-control"
+                               placeholder="Enter full name" required>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label class="fw-semibold">Email</label>
+                        <input type="email" name="email" class="form-control"
+                               placeholder="Enter email" required>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="mb-3">
+                        <label class="fw-semibold">Phone Number</label>
+                        <input type="text" name="phone" class="form-control"
+                               placeholder="Enter phone number">
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label class="fw-semibold">Password</label>
+                        <input type="password" name="password" class="form-control"
+                               placeholder="Create password" required>
+                    </div>
+
+                    <!-- Role Selection -->
+                    <div class="mb-3">
+                        <label class="fw-semibold">Register As</label>
+                        <select name="role" class="form-select" required>
+                            <option value="">Select Role</option>
+                            <option value="patient">Patient</option>
+                            <option value="doctor">Doctor</option>
+                        </select>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button class="btn btn-primary w-100 rounded-pill py-2 mt-2">
+                        Register
+                    </button>
+
+                </form>
+
+                <p class="text-center mt-3 small">
+                    Already have an account?
+                    <a href="{% url 'login' %}" class="text-primary fw-semibold">Login</a>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

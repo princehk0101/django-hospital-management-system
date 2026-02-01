@@ -1,0 +1,90 @@
+{% extends "patient/patient_base.html" %}
+{% load static %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block page_heading %}
+<i class="fa fa-user-edit me-2"></i> Edit Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="card shadow-sm border-0 p-4">
+
+                <h4 class="fw-bold mb-4">
+                    <i class="fa fa-user-circle me-2 text-primary"></i>
+                    Update Your Profile
+                </h4>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="row g-3">
+
+                        <!-- FULL NAME -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Full Name</label>
+                            <input type="text" name="name" class="form-control"
+                                   value="{{ patient.user.get_full_name }}">
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Email Address</label>
+                            <input type="email" name="email" class="form-control"
+                                   value="{{ patient.user.email }}" disabled>
+                        </div>
+
+                        <!-- PHONE -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Phone Number</label>
+                            <input type="text" name="phone" class="form-control"
+                                   value="{{ patient.phone_number }}">
+                        </div>
+
+                        <!-- AGE -->
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold">Age</label>
+                            <input type="number" name="age" class="form-control"
+                                   value="{{ patient.age }}">
+                        </div>
+
+                        <!-- GENDER -->
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold">Gender</label>
+                            <select name="gender" class="form-select">
+                                <option value="Male" {% if patient.gender == "Male" %}selected{% endif %}>Male</option>
+                                <option value="Female" {% if patient.gender == "Female" %}selected{% endif %}>Female</option>
+                                <option value="Other" {% if patient.gender == "Other" %}selected{% endif %}>Other</option>
+                            </select>
+                        </div>
+
+                        <!-- ADDRESS -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Address</label>
+                            <textarea name="address" rows="3" class="form-control">{{ patient.address }}</textarea>
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-primary w-100 rounded-pill py-2 mt-4">
+                        <i class="fa fa-save me-1"></i> Save Changes
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
