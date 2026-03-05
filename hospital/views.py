@@ -508,24 +508,12 @@ def patient_profile_edit(request):
 
 # API VIEWS
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-
+from rest_framework.viewsets import ModelViewSet
 from .models import Doctor
 from .serializers import DoctorSerializer
+from rest_framework.permissions import IsAuthenticated
 
-
-class DoctorAPI(APIView):
-
-    def get(self, request):
-        doctors = Doctor.objects.all()
-        serializer = DoctorSerializer(doctors, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = DoctorSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class DoctorViewSet(ModelViewSet):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
+    permission_classes = [IsAuthenticated]

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -49,6 +49,16 @@ path('admin/search/', views.admin_search, name='admin_search'),
     path('patient/profile-edit/', views.patient_profile_edit, name='patient_profile_edit'),
 
 
-    path('api/doctors/', views.DoctorAPI.as_view(), name='api_doctors'),
+   
 ]
 
+
+from rest_framework.routers import DefaultRouter
+from .views import DoctorViewSet
+# -------- API ROUTES --------
+router = DefaultRouter()
+router.register(r'doctors', DoctorViewSet, basename='doctor')
+
+urlpatterns += [
+    path('api/', include(router.urls)),
+]
