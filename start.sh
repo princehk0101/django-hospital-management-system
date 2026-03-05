@@ -1,0 +1,1 @@
+gunicorn Hospital_Management_System.wsgi:application
